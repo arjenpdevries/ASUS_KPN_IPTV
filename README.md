@@ -44,6 +44,12 @@ Collection of scripts and links to get your own asus router running on dutch KPN
     - PPP Echo Interval : 6 	
     - PPP Echo Max Failures : 10 	
     - Additional pppd options : empty
+  - Special Requirements from ISP
+    - Enable VPN + DHCP Connection : No
+    - Host Name : empty
+    - MAC Address : empty
+    - Extend the TTL value : No
+    - Spoof LAN TTL value : No
 * go to advanced settings - LAN, IPTV tab, then:
   - LAN Port:
     - Select ISP Profile : Manual 	
@@ -52,7 +58,8 @@ Collection of scripts and links to get your own asus router running on dutch KPN
     - LAN Port 3 VID : empty PRIO 0
   - Special applications:
     - Use DHCP routes : RFC3442
-    - Enable multicast routing : Enable	
+    - Enable multicast routing : Enable
+    - Default IGMP version : IGMP v3
     - Enable Fast Leave : Enable
     - Enable efficient multicast forwarding (IGMP Snooping) : Enable 	
     - UDP Proxy (Udpxy) : 0
