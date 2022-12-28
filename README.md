@@ -73,9 +73,9 @@ After these steps, you should be able to access the internet via the router.
   - Service
     - Enable SSH : LAN only
   - Persistent JFFS2 partition:
-    - Format JFFS partition at next boot : yes (set to NO after reboot, see below)
     - Enable JFFS custom scripts and configs : yes
-* reboot the router to create and initialize the JFFS2 partition, then **MAKE SURE** to disabe JFFS2 formatting for subsequent reboots
+    - Enable JFFS custom scripts and configs : yes
+* reboot the router to create and initialize the JFFS2 partition
 * Use putty, ssh or winscp to upload the configs and scripts to the router:
   - upload the contents of .../configs to the routers /jffs/configs
   - upload the contents of .../scripts to the routers /jffs/scripts
