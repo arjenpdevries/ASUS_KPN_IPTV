@@ -59,13 +59,15 @@ Collection of scripts and links to get your own asus router running on dutch KPN
   - Special applications:
     - Use DHCP routes : RFC3442
     - Enable multicast routing : Enable
-    - Default IGMP version : IGMP v3
+    - Default IGMP version : IGMP v2
     - Enable Fast Leave : Enable
     - Enable efficient multicast forwarding (IGMP Snooping) : Enable 	
     - UDP Proxy (Udpxy) : 0
 * Reboot the router
 
 After these steps, you should be able to access the internet via the router.
+
+_Set the Default IGMP version to v2 unless you know that your switches etc. can handle version v3._
 
 ### Step 2: configure for routed IPTV
 
@@ -88,6 +90,18 @@ The scripts were sourced from [basho's post at tweakers.net](https://gathering.t
 
 * modified the wan-start to automatically locate the router's CPU port (or as stated in the manual, CPU address). This means you no longer have to edit the script, so you can skip that part from Basho's manual.
 
+### Step 3: configure VOIP
+
+* Go to WAN - NAT Passthrough tab, then:
+  - SIP Passthrough : Disable
+  - RTSP Passthrough : Disable
+* Yes, the naming is confusing ;-) it ensures that the router does not interfere with the VOIP traffic ("SIP ALG").
+* Go to WAN - Virtual Server / Port Forwarding
+  - Add the following port forwarding rules as follows:
+    - SIP: UDP for `145.7.0.0/16` ports `5004:5099` to the Fritzbox IP
+    - RTS: UDP for `145.7.0.0/16` ports `10000:65000` to the Fritzbox IP
+  - _Note:_ the `145.7.0.0/16` subnet is specific to VOIP service provided by KPN (`voip1-ext.kpn.net`)
+
 ## Tests
 These scripts were verified to result in working internet plus routed IPTV on:
 
@@ -95,6 +109,7 @@ These scripts were verified to result in working internet plus routed IPTV on:
 * voip: not tested
 
 ## links with information on how to configure your router:
++ [integrated manual by Tweakers](https://drive.google.com/file/d/1oyU2VEwMzXDnVbJqSwLwHzaqP4R_SJGF/view) (live document)
 * [bas hoogers manual, pdf](https://bashoogers.nl/tweakers/V4_HANDLEIDING_EIGENROUTERKPN.pdf)
 * [bas hoogers manual, docx](https://bashoogers.nl/2021/12/03/kpn-glasvezel-openbaring-bronbestand-handleiding/)
 * [official KPN information](https://www.kpn.com/service/eigen-modem-instellen-en-gebruiken.htm)
