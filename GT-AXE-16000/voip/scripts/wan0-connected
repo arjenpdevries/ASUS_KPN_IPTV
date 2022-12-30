@@ -1,0 +1,34 @@
+#!/bin/sh
+#################################################################
+##### File changed for GT-AX11000 router                    #####
+##### 							                            #####
+#################################################################
+
+#################################################################
+##### Add VLAN4 as a physical interface (@ WAN PORT)
+#################################################################
+##### GT-AX11000 (ter info)
+#####  |
+#####  |\_eth0 = WAN of 2.5G poort
+#####  |\_eth1 = LAN poort 4
+#####  |\_eth2 = LAN poort 3
+#####  |\_eth3 = LAN poort 2
+#####  |\_eth4 = LAN poort 1
+#####  |\_eth5 = Bridge of 2.5G poort
+#####  |\_eth6 = Wifi 2.4 GHz
+#####  |\_eth7 = Wifi 5-1 GHz
+#####  |\_eth8 = Wifi 5-2 GHz
+
+
+/sbin/vconfig add eth0 4
+
+#################################################################
+##### Request an IP-address and setup static routes
+
+sleep 1
+udhcpc -i vlan4 --clientid-none -O msstaticroutes -O staticroutes -V IPTV_RG -s /jffs/scripts/vlan4.script -p /var/run/vlan4.pid -b -O33 -O249
+
+# Restart MCPD (Prevent IPTV Fail if Router and ONT are Booted at the same Time):
+killall mcpd
+sleep 3
+/bin/mcpd /jffs/configs/mcpd.conf
